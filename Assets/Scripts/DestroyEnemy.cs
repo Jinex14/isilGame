@@ -5,10 +5,12 @@ using UnityEngine;
 public class DestroyEnemy : MonoBehaviour
 {
     private Animator anim;
+    private BoxCollider2D colider;
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
+        colider = GetComponent<BoxCollider2D>();
     }
 
     // Update is called once per frame
@@ -23,6 +25,7 @@ public class DestroyEnemy : MonoBehaviour
         if(collision.gameObject.tag == "Bullet")
         {
             anim.SetBool("isDeath", true);
+            colider.enabled = false;
         }
     }
 

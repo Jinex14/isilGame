@@ -5,6 +5,7 @@ using UnityEngine;
 public class CamaraMove : MonoBehaviour
 {
     private Rigidbody2D rb2d;
+    public float velocidad;
     void Start()
     {
     rb2d = GetComponent<Rigidbody2D>();
@@ -12,6 +13,6 @@ public class CamaraMove : MonoBehaviour
 
 void Update()
 {
-    rb2d.velocity = new Vector2(4, rb2d.velocity.y);
+    rb2d.velocity = new Vector2(velocidad, rb2d.velocity.y);
 }
 }

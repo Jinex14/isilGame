@@ -14,8 +14,14 @@ public class Bullet : MonoBehaviour
     void Update()
     {
         transform.Translate(Vector3.right * 10 * Time.deltaTime);
+
     }
     private void OnTriggerEnter2D(Collider2D collision)
+    {
+        gameObject.SetActive(false);
+    }
+
+    private void OnBecameInvisible()
     {
         gameObject.SetActive(false);
     }

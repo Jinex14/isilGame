@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -17,6 +18,9 @@ public class PlayerMove : MonoBehaviour
     public Transform bulletTransform;
     private List<GameObject> balas = new List<GameObject>();
     private bool shootTime = true;
+    private float timeGameOver = 2;
+    private float timeaux = 0;
+    private bool loseGame = false;
     private void Awake()
     {
         if (instance == null)
@@ -30,13 +34,21 @@ public class PlayerMove : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         groundCheck = GameObject.Find("GroundCheck").GetComponent<Transform>();
-
+        timeaux = 0;
 
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (loseGame)
+        {
+            timeaux += Time.deltaTime;
+            if(timeaux >= timeGameOver)
+            {
+                SceneManager.LoadScene("GameOver");
+            }
+        }
         isGrounded = Physics2D.Linecast(transform.position, groundCheck.position, layer);
         anim.SetBool("jump", !isGrounded);
 
@@ -88,5 +100,16 @@ public class PlayerMove : MonoBehaviour
         GameObject obj = Instantiate(bullet) as GameObject;
         balas.Add(obj);
         return obj;
+    }
+
+    private void OnBecameInvisible()
+    {
+        if(transform.position.y > 3.1)
+        {
+
+        }
+        else { 
+        loseGame = true;
+        }
     }
 }
