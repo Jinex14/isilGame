@@ -12,7 +12,12 @@ public class ButtomMecanicas : MonoBehaviour
         button = GetComponent<Button>();
         button.onClick.RemoveAllListeners();
         button.onClick.AddListener(() => {
-            UnityEngine.SceneManagement.SceneManager.LoadScene("Mecanicas");
+            CircleFade.instance.StartFadeOut("Mecanicas");
         });
+    }
+
+    private void Start()
+    {
+        CircleFade.instance.StartFade();
     }
 }

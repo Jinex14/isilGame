@@ -12,7 +12,12 @@ public class ButtonStart : MonoBehaviour
         button = GetComponent<Button>();
         button.onClick.RemoveAllListeners();
         button.onClick.AddListener(() => {
-            UnityEngine.SceneManagement.SceneManager.LoadScene("Juego");
+            CircleFade.instance.StartFadeOut("Juego");
         });
+    }
+
+    private void Start()
+    {
+        CircleFade.instance.StartFade();
     }
 }
